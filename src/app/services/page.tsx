@@ -174,7 +174,7 @@ export default function Services() {
             <img
               src="/img/S1.png"
               alt="hero"
-              className="w-40 md:w-60 z-10 hover:scale-110 transition duration-300 ease-in-out"
+              className="w-70 md:w-100 z-10 hover:scale-110 transition duration-300 ease-in-out"
             />
           </div>
         </div>
