@@ -1,491 +1,280 @@
-import Image from "next/image";
+// pages/about.tsx
+"use client";
+import React, { useRef } from "react";
+import { Linkedin, Instagram, Quote } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Breadcrumb from "../components/Breadcrumb";
 import Form from "../components/Form";
+import Image from "next/image";
+import Breadcrumb from "../components/Breadcrumb";
 
-const Card1 = () => {
-  return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '5px 15px',
-      borderRadius: '0',
-      textAlign: 'center',
-      color: 'black',
-      fontWeight: 'normal',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      margin: '15px',
-      borderRight: '2px solid blue',
-      borderBottom: '4px solid violet',
-      width: '250px'
-    }}>
-      <h3 style={{ fontWeight: '600' }}>Card 1</h3>
-      <p style={{ fontWeight: '500' }}>Delivering Impactful learning Solutions that exteeds expectations.</p>
-    </div>
-  );
+// ==================== TYPES ====================
+type CoreValue = {
+  id: number;
+  title: string;
+  description: string;
 };
 
-const Card2 = () => {
-  return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '5px 15px',
-      borderRadius: '0',
-      textAlign: 'center',
-      color: 'black',
-      fontWeight: 'normal',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      margin: '15px',
-      borderRight: '2px solid blue',
-      borderBottom: '4px solid violet',
-      width: '250px'
-    }}>
-      <h3 style={{ fontWeight: '600' }}>Card 2</h3>
-      <p style={{ fontWeight: '500' }}>Delivering Impactful learning Solutions that exteeds expectations.</p>
-    </div>
-  );
+type Founder = {
+  name: string;
+  title: string;
+  linkedin: string;
+  instagram: string;
+  image: string;
 };
 
-const Card3 = () => {
-  return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '5px 15px',
-      borderRadius: '0',
-      textAlign: 'center',
-      color: 'black',
-      fontWeight: 'normal',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      margin: '15px',
-      borderRight: '2px solid blue',
-      borderBottom: '4px solid violet',
-      width: '250px'
-    }}>
-      <h3 style={{ fontWeight: '600' }}>Card 3</h3>
-      <p style={{ fontWeight: '500' }}>Delivering Impactful learning Solutions that exteeds expectations.</p>
-    </div>
-  );
-};
-
-const Card4 = () => {
-  return (
-    <div style={{
-      backgroundColor: 'white',
-      padding: '5px 15px',
-      borderRadius: '0',
-      textAlign: 'center',
-      color: 'black',
-      fontWeight: 'normal',
-      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      margin: '15px',
-      borderRight: '2px solid blue',
-      borderBottom: '4px solid violet',
-      width: '250px'
-    }}>
-      <h3 style={{ fontWeight: '600' }}>Card 4</h3>
-      <p style={{ fontWeight: '500' }}>Delivering Impactful learning Solutions that exteeds expectations.</p>
-    </div>
-  );
-};
-
-const Card5 = () => {
-  return (
-    <div style={{ backgroundColor: 'lightblue', padding: '30px', borderRadius: '0', textAlign: 'center', color: 'black', fontWeight: 'normal', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', margin: '10px', position: 'relative' }}>
-      <h3>Card 5</h3>
-      <p>Content for Card 5</p>
-      <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', top: '60%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0', marginBottom: '10px' }}>
-          <Card1 />
-          <Card2 />
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0' }}>
-          <Card3 />
-          <Card4 />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ThirdCard = () => {
-  return (
-    
-    <div style={{ backgroundColor: 'aliceblue', padding: '20px', borderRadius: '10px',
-     textAlign: 'left', color: 'black', fontWeight: 'normal', boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-      marginTop: '50px', display: 'flex', height: '250px' }}>
-      <div style={{ flex: 1, paddingRight: '20px' }}>
-<button style={{ backgroundColor: 'lightpink', color: 'black', fontWeight: 'bolder', borderRadius: '10px', padding: '15px 30px',
-   border: 'none', marginTop: '10px' }}>Our Core Values</button>
-        <p> Our principles keep us aligned with what matters most --people,purpose and progress</p>
-
-      </div>
-      <div style={{ flex: 1 }}>
-        <Card5 />
-      </div>
-    </div>
-  );
-};
-
-const Card6 = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        maxWidth: "500px",
-        margin: "40px auto",
-        borderRadius: "12px",
-        overflow: "hidden",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        border: "2px solid #c8ccd1ff",
-      }}
-    >
-      {/* Left Side - Text */}
-      <div style={{ flex: 1, padding: "24px", backgroundColor: "#fff" }}>
-        <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "12px" }}>
-          Our Vision
-        </h2>
-        <p style={{ color: "#333", lineHeight: "1.6", fontSize: "0.95rem" }}>
-          At our core, we believe in building technology that empowers people.
-          Our vision is to create innovative digital solutions that inspire
-          growth, drive transformation, and shape a brighter future.
-          We aim to bridge creativity with functionality, ensuring that
-          every project we deliver makes a lasting impact.
-        </p>
-      </div>
-
-      {/* Right Side - Gradient */}
-      <div
-        style={{
-          flex: 1,
-          background: "linear-gradient(135deg, #e8f0ff, #f5f0ff)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src="/Frame 70.png"
-          alt="Frame 70"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const Card7 = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        maxWidth: "500px",
-        margin: "40px auto",
-        borderRadius: "12px",
-        overflow: "hidden",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        border: "2px solid #c8ccd1ff",
-      }}
-    >
-      {/* Left Side - Text */}
-      <div style={{ flex: 1, padding: "24px", backgroundColor: "#fff" }}>
-        <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "12px" }}>
-          Our Mission
-        </h2>
-        <p style={{ color: "#333", lineHeight: "1.6", fontSize: "0.95rem" }}>
-          Our mission is to deliver exceptional digital experiences that drive
-          real results. We combine cutting-edge technology with creative
-          strategies to help our clients achieve their goals and exceed
-          expectations in an ever-evolving digital landscape.
-        </p>
-      </div>
-
-      {/* Right Side - Gradient */}
-      <div
-        style={{
-          flex: 1,
-          background: "linear-gradient(135deg, #e8f0ff, #f5f0ff)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          src="/image 14.png"
-          alt="Image 14"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const Card8 = () => {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "250px",
-        margin: "40px 0",
-        borderRadius: "12px",
-        overflow: "hidden",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-
-        padding: "20px",
-        backgroundColor: "#e8f0ff",
-        textAlign: "center",
-        color: "black",
-      }}
-    >
-      <p style={{ fontSize: "30px", fontWeight: "bold" }}>
-        Message From Our Director
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-        voluptatum.
-      </p>
-    </div>
-  );
-};
-
-const founders = [
-  {
-    name: "Ajinkya D. Deshmukh",
-    role: "Founder, Director & CEO",
-    img: "", // Add image URL here
-    linkedin: "#",
-    instagram: "#",
-  },
-  {
-    name: "Hrishikesh D. Mohite",
-    role: "Founder, Director & COO",
-    img: "", // Add image URL here
-    linkedin: "#",
-    instagram: "#",
-  },
-  {
-    name: "Ruturaj Y. Kale",
-    role: "Co-Founder, Director & CFO",
-    img: "", // Add image URL here
-    linkedin: "#",
-    instagram: "#",
-  },
+// ==================== DATA ====================
+const coreValues: CoreValue[] = [
+  { id: 1, title: "Excellence", description: "Delivering impactful learning solutions that exceed expectations." },
+  { id: 2, title: "Innovation", description: "Innovating with technology to deliver next-gen learning experiences." },
+  { id: 3, title: "Integrity", description: "Delivering impactful learning solutions that exceed expectations." },
+  { id: 4, title: "Learner-Centric", description: "Delivering impactful learning solutions that exceed expectations." },
 ];
 
-const Card9 = () => {
-  return (
-    <section style={{ padding: "48px 0", backgroundColor: "white" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-        {/* Heading */}
-        <h2 style={{
-          fontSize: "2rem",
-          fontWeight: "normal",
-          marginBottom: "40px",
-          color: "#111827"
-        }}>
-          The visionary founders behind Ajinkya Creation
-        </h2>
+const founders: Founder[] = [
+  { name: "Ajinkya D. Deshmukh", title: "Founder, Director & CEO", image: "/img/F1.png", linkedin: "#", instagram: "#" },
+  { name: "Hrishikesh D. Mohite", title: "Founder, Director & COO", image: "/img/F2.png", linkedin: "#", instagram: "#" },
+  { name: "Ruturaj Y. Kale", title: "Co-Founder, Director & CFO", image: "/img/F3.png", linkedin: "#", instagram: "#" },
+];
 
-        {/* Founders Grid */}
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "32px",
-          flexWrap: "wrap"
-        }}>
-          {founders.map((founder, index) => (
-            <div
-              key={index}
-              style={{
-                width: "230px",
-                textAlign: "center"
-              }}
-            >
-              {/* Image Container */}
-              <div style={{
-                width: "170px",
-                height: "170px",
-                margin: "0 auto 20px",
-                padding: "8px",
-                backgroundColor: "white",
-                borderRadius: "12px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-              }}>
-                <img
-                  src={founder.img || "/placeholder.jpg"}
-                  alt={founder.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "8px"
-                  }}
-                />
-              </div>
+// ==================== COMPONENTS ====================
+const FounderCard: React.FC<Founder> = ({ name, title, image, linkedin, instagram }) => (
+  <div className="p-4 flex flex-col items-start">
+    <Image
+      src={image}
+      alt={name}
+      width={300}
+      height={400}
+      className="w-full h-96 object-cover rounded-xl border border-gray-300"
+    />
 
-              {/* Name with Blue Line */}
-              <div style={{ position: "relative", marginBottom: "8px" }}>
-                <h3 style={{
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  color: "#111827",
-                  marginBottom: "4px"
-                }}>{founder.name}</h3>
-                <div style={{
-                  width: "4px",
-                  height: "55px",
-                  backgroundColor: "#0ea5e9",
-                  position: "absolute",
-                  left: "-12px",
-                  top: "-12px"
-                }}></div>
-              </div>
+    {/* Text + icons with vertical line */}
+    <div className="relative mt-4 pl-4 border-l-4 border-blue-500">
+      <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
+      <p className="text-gray-600 text-sm mb-2">{title}</p>
 
-              {/* Role */}
-              <p style={{
-                fontSize: "0.875rem",
-                color: "#6b7280",
-                marginBottom: "12px"
-              }}>{founder.role}</p>
-
-              {/* Social Icons */}
-              <div style={{
-                display: "flex",
-                gap: "4px",
-                justifyContent: "center",
-                marginTop: "4px"
-              }}>
-                <a
-                  href={founder.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div style={{
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#0077B5",
-                    borderRadius: "4px"
-                  }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </div>
-                </a>
-                <a
-                  href={founder.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div style={{
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#E4405F",
-                    borderRadius: "4px"
-                  }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                  </div>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="flex gap-4 mt-1">
+        <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-500">
+          <Linkedin size={20} />
+        </a>
+        <a href={instagram} target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-500">
+          <Instagram size={20} />
+        </a>
       </div>
-    </section>
-  );
-};
+    </div>
+  </div>
+);
 
-const Card10 = () => {
+
+// ==================== MAIN PAGE ====================
+const AboutUsPage: React.FC = () => {
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "About" },
+  ];
+
   return (
-    <div>
-      <section style={{ padding: "20px", backgroundColor: "aliceblue", marginTop: "50px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          {/* Left Content */}
-          <div style={{ flex: 1, paddingRight: "20px" }}>
-            <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "16px" }}>
-              Faces Behind Our Software Solution
-            </h2>
-            <p style={{ color: "#1c1d1eff", lineHeight: "1.625" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor
-              sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet,
-              consectetur adipiscing.
-            </p>
-          </div>
+    <div className="min-h-screen bg-white">
+      <Header />
 
-          {/* Right Faces Section */}
-          <div style={{ flex: 1, display: "flex", gap: "16px" }}>
-            {/* Highlighted Image */}
-            <div style={{ width: "140px", height: "180px", background: "linear-gradient(to bottom, #faf5ff, #eef2ff)", borderRadius: "12px", boxShadow: "0 4px 6px rgba(0,0,0,0.1)", border: "2px solid lightpink" }}>
-              <img src="\Frame 150.png" alt="Face" style={{ width: '100%', height: '100%', borderRadius: '12px' }} />
+      {/* Hero Section */}
+      <section className="relative min-h-[400px] flex items-center justify-center text-white overflow-hidden">
+        <div className="absolute left-0 w-3/4 h-[180%] opacity-50 lg:opacity-100 -translate-y-50 -translate-x-50 scale-150 lg:scale-100">
+          <Image src="/img/Frame 130.png" alt="Left Background" fill className="object-contain" priority />
+        </div>
+        <div className="absolute right-0 top-0 w-3/4 h-[180%] opacity-50 lg:opacity-100 translate-y-10 translate-x-70 scale-150 lg:scale-100">
+          <Image src="/img/Frame 131.png" alt="Right Background" fill className="object-contain" priority />
+        </div>
+        <div className="relative z-10 px-4 pt-12 w-full max-w-7xl mx-auto">
+          <div className="relative w-full max-w-7xl">
+            <div className="mb-2 lg:mb-0 lg:absolute lg:top-[-88px] lg:left-0">
+              <Breadcrumb items={breadcrumbItems} />
             </div>
-
-            {/* Grey Placeholders */}
-            <img src="/Frame 155.png" alt="Placeholder 1" style={{ width: "100px", height: "140px", borderRadius: "12px", border: "2px solid lightpink" }} />
-            <img src="/Frame 156.png" alt="Placeholder 2" style={{ width: "100px", height: "140px", borderRadius: "12px", border: "2px solid lightpink" }} />
-            <img src="/Frame 157.png" alt="Placeholder 3" style={{ width: "100px", height: "140px", borderRadius: "12px", border: "2px solid lightpink" }} />
-            <img src="/Frame 158.png" alt="Placeholder 4" style={{ width: "100px", height: "140px", borderRadius: "12px", border: "2px solid lightpink" }} />
+            <h1 className="mt-6 lg:mt-12 text-2xl md:text-4xl lg:text-5xl font-bold text-black md:leading-tight text-center lg:text-left max-w-2xl lg:max-w-3xl mx-auto lg:mx-0">
+              Driving Digital Growth Through Custom Solutions
+            </h1>
           </div>
         </div>
       </section>
-      <Header />
+
+      {/* WHO WE ARE & PROCESS STEPS */}
+<section className="py-8">
+  <div className="bg-white overflow-hidden mb-8 -mx-4 sm:mx-0 p-6 sm:p-10 md:p-12">
+    {/* Heading */}
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-center sm:text-left">
+      Who Are <strong className="text-purple-600">We</strong>
+    </h2>
+    <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 mb-8 text-center sm:text-left">
+      We design, develop and deliver digital brilliance.
+    </p>
+
+    {/* Steps */}
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-4 md:gap-6 mb-12 sm:mb-16">
+      {["Foundation", "Innovation", "Growth", "Future"].map((step, i) => (
+        <React.Fragment key={i}>
+          {/* Step Button */}
+          <div className="p-[2px] rounded-full bg-gradient-to-r from-purple-500 to-blue-500">
+            <button className="px-5 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full bg-sky-100 text-gray-800 text-sm sm:text-base md:text-lg font-medium shadow-sm transition-all">
+              {step}
+            </button>
+          </div>
+
+          {/* Arrow (hidden for last step) */}
+          {i < 3 && (
+            <div className="flex flex-col sm:flex-row items-center gap-2">
+              {/* Circle with arrow */}
+              <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-sky-100 text-sky-500 border border-sky-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </div>
+              {/* Line */}
+              <div className="w-[2px] h-6 sm:w-8 sm:h-[2px] bg-sky-200"></div>
+            </div>
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+      {/* CORE VALUES */}
+      <section className="py-8 bg-white">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-8 px-8">
+          <div>
+            <button className="text-2xl sm:text-3xl font-bold text-black bg-purple-200 px-6 py-3 rounded-full shadow-md hover:bg-pink-300 transition duration-300 mb-6">
+              Our Core Values
+            </button>
+            <p className="text-black leading-relaxed mt-4 mb-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              {coreValues.map((val) => (
+                <div key={val.id} className="p-4 rounded-xl bg-white shadow-md border border-gray-100 relative overflow-hidden">
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500" />
+                  <div className="relative z-10 space-y-2">
+                    <p className="text-2xl font-bold text-gray-900 mb-2">0{val.id}</p>
+                    <h4 className="text-lg font-bold text-gray-900">{val.title}</h4>
+                    <p className="text-sm text-gray-600 leading-snug">{val.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* VISION & MISSION */}
+<section className="py-8 px-4 sm:px-6 lg:px-12 bg-gray-50">
+  <div className="max-w-3xl mx-auto">
+    {["Our Vision", "Our Mission"].map((title, i) => (
+      <div
+        key={i}
+        className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-8 flex flex-col lg:flex-row min-h-[300px]"
+      >
+        {/* Left: Text */}
+        <div className="flex-1 p-6 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold mb-4">{title}</h2>
+          <p className="leading-relaxed text-gray-700">
+            Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing.
+          </p>
+        </div>
+
+        {/* Right: Image full height */}
+        <div className="w-full lg:w-1/2 h-64 lg:h-auto">
+          <img
+            src={i === 0 ? "/img/A2.png" : "/img/A1.png"}
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+      {/* MESSAGE FROM OUR DIRECTOR */}
+<section className="py-16 bg-white">
+  <div className="max-w-6xl mx-auto px-6">
+    <div className="relative bg-gradient-to-b from-white to-blue-100 rounded-xl p-8 shadow-md">
+      {/* Inverted comma (left side) */}
+      <Quote className="absolute left-6 top-6 w-16 h-16 text-blue-300 opacity-60 rotate-180" />
+
+      <div className="pl-24 text-center">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          Message From Our Director
+        </h2>
+        <p className="text-gray-600 leading-relaxed">
+          Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      {/* FOUNDERS */}
+      <section className="py-16 px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            The visionary founders behind <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Ajinkya</span>{" "}
+            <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Creatiion</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            {founders.map((founder) => (
+              <FounderCard key={founder.name} {...founder} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FACES BEHIND */}
+      <section className="py-16 px-8 bg-white">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="lg:pr-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Faces Behind Our Software Solution</h2>
+            <p className="text-black leading-relaxed mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </p>
+          </div>
+
+          <div className="flex space-x-4 h-64">
+            <img src="/img/face1.png" alt="Frame 155" className="w-1/2 h-full rounded-xl object-cover flex-shrink-0" />
+            <div className="w-1/2 grid grid-cols-4 gap-4">
+              <img src="/img/face2.png" alt="Frame 156" className="w-full h-full rounded-xl object-cover" />
+              <img src="/img/face3.png" alt="Frame 157" className="w-full h-full rounded-xl object-cover" />
+              <img src="/img/face4.png" alt="Frame 157" className="w-full h-full rounded-xl object-cover" />
+              <img src="/img/face5.png" alt="Frame 158" className="w-full h-full rounded-xl object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-20 bg-gray-50" />
+      <div ref={formRef} id="contact-form">
+        <Form />
+      </div>
+
       <Footer />
     </div>
   );
 };
 
-const About = () => {
-  return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ backgroundImage: 'url("/Frame128.png")', backgroundSize: 'cover', backgroundPosition: 'center',padding: '140px',
-         borderRadius: '10px', textAlign: 'left', color: 'black', fontWeight: 'bold', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
-
-        <div style={{ fontSize: '30px', fontWeight: 'bold', marginTop: '-40px', marginLeft: '-20px' }}>Driving Digital Growth Through Custom Solutions</div>
-
-      </div>
-      <div style={{ backgroundColor: 'aliceblue', padding: '140px 130px 150px 40px', borderRadius: '10px', textAlign: 'left',
-        color: 'black', fontWeight: 'bold', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', marginTop: '20px' }}>
-        <div>
-          <div style={{ fontSize: '30px', fontWeight: 'bold' }}>Who Are</div>
-          <div style={{ display: 'flex', alignItems: 'center', fontSize: '30px' }}>
-            <span style={{ fontWeight: 'bold', marginRight: '20px', background: 'linear-gradient(to right, #a855f7, #10b981)', backgroundClip: 'text', WebkitBackgroundClip: 'text', color: 'transparent' }}>WE</span>
-            <span style={{ fontWeight: 'bold', fontSize: '20px' }}>design, develop and deliver digital brilliance.</span>
-          </div>
-          <div style={{ marginTop: '20px', marginLeft: '150px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <button style={{ background: 'linear-gradient(lightblue, lightblue) padding-box, linear-gradient(to right, #a855f7, #10b981) border-box', color: 'black', fontWeight: 'bold', borderRadius: '10px', padding: '17px 45px', border: '3px solid transparent' }}>Foundation</button>
-            <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>➝</span>
-            <button style={{ background: 'linear-gradient(lightblue, lightblue) padding-box, linear-gradient(to right, #a855f7, #10b981) border-box', color: 'black', fontWeight: 'bold', borderRadius: '10px', padding: '17px 45px', border: '3px solid transparent' }}>Innovation</button>
-            <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>➝</span>
-            <button style={{ background: 'linear-gradient(lightblue, lightblue) padding-box, linear-gradient(to right, #a855f7, #10b981) border-box', color: 'black', fontWeight: 'bold', borderRadius: '10px', padding: '17px 45px', border: '3px solid transparent' }}>Future</button>
-            <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#555' }}>➝</span>
-            <button style={{ background: 'linear-gradient(lightblue, lightblue) padding-box, linear-gradient(to right, #a855f7, #10b981) border-box', color: 'black', fontWeight: 'bold', borderRadius: '10px', padding: '17px 45px', border: '3px solid transparent' }}>Growth</button>
-          </div>
-        </div>
-      </div>
-      <ThirdCard />
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Card6 />
-        <Card7 />
-        <Card8 />
-        <Card9 />
-        <Card10 />
-
-      </div>
-    </div>
-  )
-}
-
-export default About
+export default AboutUsPage;

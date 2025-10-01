@@ -11,6 +11,14 @@ export default function NewsPage() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // ✅ Add ref for form scrolling
+  const formRef = useRef<HTMLDivElement>(null);
+
+  // ✅ Scroll function
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -26,46 +34,18 @@ export default function NewsPage() {
     <div className="relative min-h-screen bg-white ">
       <Header />
 
-      {/* NEW: Mobile-friendly horizontal dropdown (visible on small screens)
-      */}
-      <div ref={dropdownRef} className="relative z-20 mx-4 mt-4 block md:hidden">
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between"
-        >
-          Blogs
-          <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
-        </button>
+      
 
-        {open && (
-          <div className="absolute top-full left-0 mt-1 bg-white border shadow rounded p-3 space-y-2 w-full">
-            <Link href="/Blogs" className="block cursor-pointer hover:text-purple-600">
-              Blogs
-            </Link>
-            {/* Add other mobile menu items here if needed */}
-          </div>
-        )}
-      </div>
+{/* Desktop rotated button (visible on md+ screens) */}
+<div className="fixed left-0 top-1/2 -rotate-90 z-20 hidden md:block">
+  <Link href="/Blogs">
+    <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between">
+      Blogs
+      
+    </button>
+  </Link>
+</div>
 
-      {/* EXISTING: Sidebar Vertical Dropdown (hidden on small screens, block on medium/large) 
-      */}
-      <div ref={dropdownRef} className="fixed left-0 top-1/2 -rotate-90 z-20 hidden md:block">
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between "
-        >
-          Blogs
-          <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
-        </button>
-
-        {open && (
-          <div className="absolute left-full top-0 rotate-90 origin-top-left bg-white border shadow rounded p-3 space-y-2 w-44">
-            <Link href="/Blogs" className="block cursor-pointer hover:text-purple-600">
-              Blogs
-            </Link>
-          </div>
-        )}
-      </div>
 
       {/* Top Section */}
       <section className="relative w-full mx-auto flex flex-col md:flex-row items-start py-12 overflow-hidden px-4 md:px-0">
@@ -137,6 +117,15 @@ export default function NewsPage() {
           </div>
         </div>
       </section>
+      {/* Mobile-friendly horizontal button (visible on small screens) */}
+<div className="relative z-20 mx-34 mt-4  block md:hidden">
+  <Link href="/Blogs">
+    <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between">
+      Blogs
+      
+    </button>
+  </Link>
+</div>
 
       {/* Divider - This seems misplaced/redundant in the original, keeping it minimally visible */}
       <div className="hidden border-l-4 border-gray-500 pl-4"></div>
@@ -217,7 +206,9 @@ export default function NewsPage() {
       </section>
       
       <div className="mt-12 md:mt-20">
+        <div ref={formRef} id="contact-form">
         <Form />
+      </div>
       </div>
       <Footer />
     </div>

@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, Settings, Clock, Sun, BarChart, DollarSign, Laptop } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
+import Form from "../components/Form";
 
 
 const testimonials = [
@@ -76,6 +77,13 @@ const faqs: FAQ[] = [
 const Home = () => {
   // ✅ Added state for FAQ toggle
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const formRef = useRef<HTMLDivElement>(null);
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -120,83 +128,99 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <h1 className="text-align-Center mt-5 container mx-auto pt-24 z-10 mr-800 text-align-Center ml-10  ">
-        <span className="text-black font-bold text-4xl">
-          We deliver measurable business    
+      <section className="relative container mx-auto px-1 pt-32 md:pt-40 pb-16 md:pb-24 min-h-[600px]">
+
+  {/* Hero Heading */}
+<div className="text-center md:text-left max-w-3xl mx-auto md:mx-0">
+  <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-black">
+    <span>We deliver measurable business</span>
+    <br />
+    <span>impact through</span>
+
+    <span className="relative inline-block px-2 sm:px-4 py-1">
+      <span className="absolute inset-0 bg-purple-200 -skew-x-16 skew-y-2 rounded"></span>
+      <span className="relative">custom-built in</span>
+    </span>
+
+    <br />
+    <span>software, strategy, and</span>
+    <br />
+    <span>innovation.</span>
+  </h1>
+
+  {/* Sub Text */}
+  <p className="mt-4 text-lg sm:text-xl text-gray-600">
+    Accelerate your growth and drive innovation
+  </p>
+
+  {/* CTA Button */}
+  <button className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-900 text-sm sm:text-base">
+    Contact us
+  </button>
+</div>
+
+  {/* Tags (buttons) */}
+  <div className="flex flex-wrap justify-start items-center gap-3 mt-10 ml-2 md:ml-10">
+    {["Digital transformation", "Adaptive Learning", "Data Driven"].map((text, idx) => (
+      <button
+        key={idx}
+        className="border border-gray-300 px-4 py-2 rounded-3xl flex items-center gap-2 text-sm sm:text-base"
+      >
+        <span className="inline-flex bg-blue-200 text-black rounded-full w-6 h-6 items-center justify-center text-sm">
+          +
         </span>
-        <br />
-       
-        <span className="text-black font-bold text-4xl">impact through </span>
-        <span className="relative inline-block text-4xl font-bold text-black px-4 py-1">
-  <span className="absolute inset-0 bg-purple-200 -skew-x-16 skew-y-2 rounded"></span>
-  <span className="relative">custom-built in</span>
-</span>
-
-        <br />
-        
-        <span className="text-black text-4xl font-bold">software, strategy, and</span>
-        <br/>
-        <span className="text-black text-4xl font-bold">innovation.</span>
-      </h1>
-
-      
-
-      <p className="mt-4 text-align-Center container mx-auto text-2xl mr-800 text-align-Center ml-10">
-        Accelerate your growth and drive innovation
-      </p>
-
-      <button className="mt-8 ml-10 mr-48 mb-10 border border-gray-1.5 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-900 ">
-        Contact us
+        {text}
       </button>
+    ))}
+  </div>
 
-      <div className="flex justify-center items-center gap-2 mt-12 mb-6 mr-188">
-  <button className="border border-gray-300 px-4 py-2 rounded-3xl">
-    <span className="inline-flex bg-blue-200 text-black rounded-full w-6 h-6 items-center justify-center text-sm">+</span> Digital transformation
-  </button>
+  {/* Large Screen Background Shape */}
+{/* Large Screen Background Shape */}
+<div className="hidden xl:block absolute top-0 right-0 lg:-right-24 xl:-right-32 2xl:-right-40 w-[30vw] h-[130%] bg-blue-50 -z-10"></div>
 
-  <button className="border border-gray-300 px-4 py-2 rounded-3xl">
-    <span className="inline-flex bg-blue-200 text-black rounded-full w-6 h-6 items-center justify-center text-sm">+</span> Adaptive Learning
-  </button>
 
-  <button className="border border-gray-300 px-4 py-2 rounded-3xl">
-    <span className="inline-flex bg-blue-200 text-black rounded-full w-6 h-6 items-center justify-center text-sm">+</span> Data Driven
+
+
+  {/* Hero Image */}
+  <div className="w-full lg:absolute lg:top-20 lg:right-10 lg:w-[39%] flex justify-center items-center z-10 mt-8 lg:mt-0">
+    <img
+      src="/img/Frame 253.png"
+      alt="hero"
+      className="rounded-lg w-full md:w-3/4 lg:w-full h-auto hover:scale-110 transition duration-300 ease-in-out"
+    />
+  </div>
+
+  {/* Overlapping Card - visible only on desktop and larger */}
+<div className="hidden xl:flex absolute top-[15%] xl:left-[640px] 2xl:left-[720px] bg-white/20 rounded-lg p-6 shadow-lg w-64 h-40 flex-col items-start z-20">
+  <div className="bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+    <img src="/img/h1.png" alt="Custom Icon" className="w-6 h-6 object-contain" />
+  </div>
+
+  <h3 className="text-lg font-bold mb-2 text-gray-900">
+    End-to-End Solution
+  </h3>
+
+  <button className="mt-2 ml-10 px-2 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm">
+    Get started
   </button>
 </div>
 
 
-      {/* Backgrounds */}
-      <div className="absolute top-10 right-0 w-[29%] h-full bg-blue-50 -z-10 pt-24"></div>
-      <div className="absolute top-0 right-30 w-[39%] h-full flex justify-center items-center z-10">
-        <img
-          src="/img/Frame 253.png"
-          alt="hero"
-          className="rounded-lg w-[90%] h-auto z-10 hover:scale-110 transition duration-300 ease-in-out"
-        />
-      </div>
-
-      {/* Overlapping Card */}
-      <div className="absolute top-45 left-180 bg-white/20 rounded-lg p-6 shadow-lg w-64 h-40 flex flex-col items-start z-20">
-
-
-       <div className="bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center mb-3 overflow-hidden">
-  <img
-    src="/img/h1.png"
-    alt="Custom Icon"
-    className="w-6 h-6  object-contain"
-  />
-
-
-
-        </div>
-        <h3 className="text-lg font-bold mb-2 text-gray-900">End-to-End Solution</h3>
-        <button className="mt-2 ml-10 px-2 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm ">
-          Get started
-        </button>
-      </div>
   
 
-      <div className="bg-white border border-gray-1.5 px-4 py-16 mt-16 mb-10"></div>
+</section>
+
+<section>
+  <div className="bg-white border border-gray-300 w-screen mt-8 sm:mt-12 md:mt-16 mb-6 sm:mb-8 md:mb-10 py-8 sm:py-12 md:py-16">
+  <div className="max-w-6xl mx-auto px-4">
+    {/* Content goes here */}
+  </div>
+</div>
+</section>
+  
+
+      
+
 
        <section className="w-full py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 space-y-12">
@@ -321,32 +345,35 @@ const Home = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-16 ml-100">
-          <div className="bg-white shadow-md rounded-xl p-8 flex flex-wrap justify-around items-center">
-            <div className="text-center px-6">
-              <h3 className="text-2xl font-bold text-purple-700">2023</h3>
-              <p className="text-gray-600">Founded</p>
-            </div>
-            <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
+<div className="mt-16 px-4 sm:px-6 lg:px-0">
+  <div className="bg-white shadow-md rounded-xl p-8 flex flex-wrap justify-around items-center">
+    
+    <div className="text-center px-6 py-4">
+      <h3 className="text-2xl font-bold text-purple-700">2023</h3>
+      <p className="text-gray-600">Founded</p>
+    </div>
+    <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
 
-            <div className="text-center px-6">
-              <h3 className="text-2xl font-bold text-purple-700">4</h3>
-              <p className="text-gray-600">Divisions</p>
-            </div>
-            <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
+    <div className="text-center px-6 py-4">
+      <h3 className="text-2xl font-bold text-purple-700">4</h3>
+      <p className="text-gray-600">Divisions</p>
+    </div>
+    <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
 
-            <div className="text-center px-6">
-              <h3 className="text-2xl font-bold text-purple-700">6+</h3>
-              <p className="text-gray-600">Services</p>
-            </div>
-            <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
+    <div className="text-center px-6 py-4">
+      <h3 className="text-2xl font-bold text-purple-700">6+</h3>
+      <p className="text-gray-600">Services</p>
+    </div>
+    <span className="hidden sm:block w-px h-12 bg-gray-300"></span>
 
-            <div className="text-center px-6">
-              <h3 className="text-2xl font-bold text-purple-700">100%</h3>
-              <p className="text-gray-600">Innovation</p>
-            </div>
-          </div>
-        </div>
+    <div className="text-center px-6 py-4">
+      <h3 className="text-2xl font-bold text-purple-700">100%</h3>
+      <p className="text-gray-600">Innovation</p>
+    </div>
+
+  </div>
+</div>
+
       </section>
 
       <section className="bg-[#f2f8fc] py-16 px-6 md:px-12 lg:px-24">
@@ -438,86 +465,95 @@ const Home = () => {
 </section>
 
       {/* ✅ Testimonials Section */}
-      <section className="w-full bg-white py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3">
-          {/* Line */}
-          <span className="w-10 h-[1.5px] bg-black"></span>
-          {/* Tag */}
-          <button className="px-4 py-1 bg-purple-100 text-gray-900 rounded-md text-sm font-medium">
-            Testimonials
-          </button>
-        </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              What Our Clients Say
-            </h2>
-          </div>
+<section className="w-full bg-white py-16 px-4">
+  <div className="max-w-6xl mx-auto">
+    {/* Section Header */}
+    <div className="mb-8">
+      <div className="flex items-center gap-3">
+        <span className="w-10 h-[1.5px] bg-black"></span>
+        <button className="px-4 py-1 bg-purple-100 text-gray-900 rounded-md text-sm font-medium">
+          Testimonials
+        </button>
+      </div>
+      <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+        What Our Clients Say
+      </h2>
+    </div>
 
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <div
-                key={t.id}
-                className="bg-white border rounded-lg shadow-sm p-6 flex flex-col justify-between"
-              >
-                <p className="text-gray-600 mb-4">“{t.text}”</p>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{t.name}</h4>
-                    <p className="text-sm text-gray-500">{t.role}</p>
-                  </div>
-                </div>
+    {/* Scrollable Testimonials Grid */}
+    <div className="relative">
+      <div
+        ref={scrollRef}
+        className="scroll-container flex gap-6 overflow-x-auto scroll-smooth"
+      >
+        {testimonials.map((t) => (
+          <div
+            key={t.id}
+            className="bg-white border rounded-lg shadow-sm p-6 flex flex-col justify-between"
+          >
+            <p className="text-gray-600 mb-4">“{t.text}”</p>
+            <div className="flex items-center gap-4">
+              <img
+                src={t.image}
+                alt={t.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <h4 className="font-semibold text-gray-900">{t.name}</h4>
+                <p className="text-sm text-gray-500">{t.role}</p>
               </div>
-            ))}
+            </div>
           </div>
+        ))}
+      </div>
 
-          {/* Navigation Arrows */}
-<div className="flex justify-center gap-6 mt-8 mr-248">
-  <motion.button
-    whileHover={{ scale: 1.2 }}
-    whileTap={{
-      scale: 0.95,
-      backgroundColor: "#2563eb", // Tailwind blue-600
-      transition: { duration: 0.2 },
-    }}
-    className="w-10 h-10 flex items-center justify-center border border-blue-400 rounded-full"
-  >
-    <FaArrowLeft className="text-blue-500 motion-safe:group-hover:text-white" />
-  </motion.button>
+      {/* Navigation Arrows */}
+      <div className="flex justify-center gap-6 mt-8">
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.95, backgroundColor: "#2563eb", transition: { duration: 0.2 } }}
+          onClick={() => {
+            scrollRef.current?.scrollBy({
+              left: -350,
+              behavior: "smooth"
+            });
+          }}
+          className="w-10 h-10 flex items-center justify-center border border-blue-400 rounded-full"
+        >
+          <FaArrowLeft className="text-blue-500" />
+        </motion.button>
 
-  <motion.button
-    whileHover={{ scale: 1.2 }}
-    whileTap={{
-      scale: 0.95,
-      backgroundColor: "#2563eb", // Tailwind blue-600
-      transition: { duration: 0.2 },
-    }}
-    className="w-10 h-10 flex items-center justify-center border border-blue-400 rounded-full"
-  >
-    <FaArrowRight className="text-blue-500 motion-safe:group-hover:text-white" />
-  </motion.button>
-</div>
-</div>
-      </section>
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.95, backgroundColor: "#2563eb", transition: { duration: 0.2 } }}
+          onClick={() => {
+            scrollRef.current?.scrollBy({
+              left: 350,
+              behavior: "smooth"
+            });
+          }}
+          className="w-10 h-10 flex items-center justify-center border border-blue-400 rounded-full"
+        >
+          <FaArrowRight className="text-blue-500" />
+        </motion.button>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* FAQ Section */}
       <section className="w-full max-w-6xl mx-auto py-24 px-4 ">
         <div className="text-center mb-10">
-          <div className="flex items-center gap-3 ml-120">
-          {/* Line */}
-          <span className="w-10 h-[1.5px] bg-black"></span>
-          {/* Tag */}
-          <button className="px-4 py-1 bg-purple-100 text-gray-900 rounded-md text-sm font-medium ">
-            FAQs
-          </button>
-        </div>
+          <div className="flex items-center gap-3 ml-auto md:ml-10">
+  {/* Line */}
+  <span className="w-10 h-[1.5px] bg-black"></span>
+
+  {/* Button */}
+  <button className="px-4 py-1 bg-purple-100 text-gray-900 rounded-md text-sm font-medium whitespace-nowrap">
+    FAQs
+  </button>
+</div>
+
           <h2 className="text-3xl md:text-4xl font-bold mt-4">
             Questions? Look Here
           </h2>
@@ -559,122 +595,9 @@ const Home = () => {
           ))}
         </div>
       </section>
-     <section className="bg-gradient-to-b from-[#f7f9fc] to-[#d9f0fa] py-0 px-6 md:px-12 lg:px-20">
-  <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[400px]">
-    
-    {/* Left Side - Form */}
-    <div className="flex flex-col justify-center p-12 bg-gradient-to-b from-[#f7f9fc] to-[#d9f0fa]">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-        Ready to Build Smarter Solutions?
-      </h2>
-
-      {/* Form Fields */}
-      <form className="space-y-4 w-100 mx-auto">
-        {/* Full Name */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1 text-sm">
-            Full Name *
-          </label>
-          <input
-            type="text"
-            required
-            className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-          />
-        </div>
-
-        {/* Contact Number */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1 text-sm">
-            Contact Number *
-          </label>
-          <input
-            type="tel"
-            required
-            placeholder="+91 9876543210"
-            className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-          />
-        </div>
-
-        {/* Email */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1 text-sm">
-            Email ID *
-          </label>
-          <input
-            type="email"
-            required
-            className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-          />
-        </div>
-
-        {/* Budget Dropdown */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1 text-sm">
-            I’m willing to spend *
-          </label>
-          <select
-            required
-            className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-          >
-            <option value="">-- Select Budget --</option>
-            <option value="0-1 lac">0 - 1 Lac</option>
-            <option value="1-2 lac">1 - 2 Lac</option>
-            <option value="3-4 lac">3 - 4 Lac</option>
-            <option value="4 lac plus">4 Lac Plus</option>
-          </select>
-        </div>
-
-        {/* Enquiry For */}
-        <div className="mb-6">
-          <p className="font-medium text-gray-800 mb-3">Enquiry For</p>
-          <div className="grid grid-cols-2 gap-4">
-            {options.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setSelected(option)}
-                className={`px-4 py-2 rounded-full shadow-md text-sm transition-colors ${
-                  selected === option
-                    ? "bg-sky-500 text-white"
-                    : "bg-white text-gray-700"
-                }`}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-  <label className="block text-gray-700 font-medium mb-1 text-sm">
-    Message
-  </label>
-  <textarea
-    rows={5}
-    placeholder="Write your message here..."
-    className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-  ></textarea>
-</div>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          className="w-full bg-sky-500 hover:bg-sky-600 text-white font-medium py-3 rounded-md shadow-md transition text-sm"
-        >
-          Send Message
-        </button>
-      </form>
-    </div>
-
-    {/* Right Side - Image */}
-    <div className="hidden lg:block h-full">
-      <img
-        src="/img/Group 23.png"
-        alt="AI illustration"
-        className="w-full h-full object-cover ml-20"
-      />
-    </div>
-  </div>
-</section>
+     <div ref={formRef} id="contact-form">
+        <Form />
+      </div>
 
 
     </div>
