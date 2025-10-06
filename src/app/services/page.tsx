@@ -205,28 +205,28 @@ export default function Services() {
                 logo: "/img/S2.png",
                 title: "SCORM Development",
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                buttonText: "Learn More",
+                
               },
               {
                 id: 2,
                 logo: "/img/S3.png",
                 title: "Software Development",
                 text: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                buttonText: "Discover",
+                
               },
               {
                 id: 3,
                 logo: "/img/S4.png",
                 title: "UI/UX Design",
                 text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-                buttonText: "Explore",
+                
               },
               {
                 id: 4,
                 logo: "/img/S5.png",
                 title: "Mobile App Development",
                 text: "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
-                buttonText: "Get Started",
+                
               },
             ].map((card) => (
               <div
@@ -253,10 +253,7 @@ export default function Services() {
                   {/* Text */}
                   <p className="text-gray-700 mb-6">{card.text}</p>
 
-                  {/* Button */}
-                  <button className="px-4 py-2 text-sm font-medium text-white bg-blue-400 rounded-md">
-                    {card.buttonText}
-                  </button>
+                  
                 </div>
               </div>
             ))}
