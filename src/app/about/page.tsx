@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import Form from "../components/Form";
 import Image from "next/image";
 import Breadcrumb from "../components/Breadcrumb";
+import LandingAccordionItem from "../components/interactive-image-accordion";
+
 
 // ==================== TYPES ====================
 type CoreValue = {
@@ -245,27 +247,26 @@ const AboutUsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* FACES BEHIND */}
       <section className="py-16 px-8 bg-white">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="lg:pr-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Faces Behind Our Software Solution</h2>
-            <p className="text-black leading-relaxed mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing.
-            </p>
-          </div>
+  <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+    
+    {/* Left Column: Text */}
+    <div className="lg:col-span-2 lg:pr-8">
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        Faces Behind Our Software Solution
+      </h2>
+      <p className="text-black leading-relaxed mb-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing. Lorem ipsum dolor sit amet, consectetur adipiscing.
+      </p>
+    </div>
 
-          <div className="flex space-x-4 h-64">
-            <img src="/img/face1.png" alt="Frame 155" className="w-1/2 h-full rounded-xl object-cover flex-shrink-0" />
-            <div className="w-1/2 grid grid-cols-4 gap-4">
-              <img src="/img/face2.png" alt="Frame 156" className="w-full h-full rounded-xl object-cover" />
-              <img src="/img/face3.png" alt="Frame 157" className="w-full h-full rounded-xl object-cover" />
-              <img src="/img/face4.png" alt="Frame 157" className="w-full h-full rounded-xl object-cover" />
-              <img src="/img/face5.png" alt="Frame 158" className="w-full h-full rounded-xl object-cover" />
-            </div>
-          </div>
-        </div>
-      </section>
+    {/* Right Column: Accordion */}
+    <div className="flex justify-end items-center h-64 md:h-96">
+      <LandingAccordionItem />
+    </div>
+
+  </div>
+</section>
 
       <div className="h-20 bg-gray-50" />
       <div ref={formRef} id="contact-form">

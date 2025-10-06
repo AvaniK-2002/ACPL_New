@@ -9,13 +9,14 @@ import {
   ArrowRight,
   MessageCircle
 } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   const socialLinks = [
     { icon: Linkedin, href: 'https://www.linkedin.com/company/ajinkya-creatiion-private-limited/', label: 'LinkedIn' },
     { icon: Twitter, href: 'https://twitter.com/', label: 'Twitter' },
     { icon: Github, href: 'https://github.com/', label: 'GitHub' },
-    { icon: MessageCircle, href: 'https://wa.me/919960041473', label: 'WhatsApp' },
+   { icon: FaWhatsapp, href: 'https://wa.me/919960041473', label: 'WhatsApp' },
   ];
 
   return (
@@ -110,8 +111,13 @@ const Footer = () => {
               </div>
             </div>
           </div>
+          </div>
+            <div className="mt-10 flex justify-end">
+  <p className="text-2xs text-gray-600 font-semibold">
+    © 2025 Ajinkya Creatiion. All rights reserved.
+  </p>
+</div>
 
-        </div>
       </div>
     </footer>
   );

@@ -57,12 +57,12 @@ const Header = () => {
             >
               <Info size={18} className="lg:hidden xl:inline" /> Insights
             </Link>
-            <button
-              onClick={scrollToForm}
-              className="px-3 sm:px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition-colors text-sm sm:text-base"
-            >
-              Contact Us
-            </button>
+            <Link
+  href="/contact"
+  className="px-3 sm:px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition-colors text-sm sm:text-base inline-block"
+>
+  Contact Us
+</Link>
           </div>
 
           {/* Mobile Hamburger (below md) */}
@@ -108,12 +108,12 @@ const Header = () => {
               >
                 <Info size={18} /> Insights
               </Link>
-              <button
-                onClick={scrollToForm}
-                className="w-full px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition-colors"
-              >
-                Contact Us
-              </button>
+              <Link
+  href="/contact"
+  className="px-3 sm:px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition-colors text-sm sm:text-base inline-block"
+>
+  Contact Us
+</Link>
             </div>
           </div>
         )}
