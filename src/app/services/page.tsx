@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Breadcrumb from "../components/Breadcrumb";
 import Form from "../components/Form";
+import CustomCursor from "../components/CustomCursor"
 
 interface CardData {
   id: number;
@@ -158,10 +159,11 @@ export default function Services() {
               End-to-End Development for a Digital-First World.
             </h1>
             <p className="text-gray-600 mb-6 text-justify mx-auto lg:mx-0 max-w-xl">
-              Our services are designed to help businesses thrive in the digital
-              age. From custom software development to SCORM-compliant
-              e-learning solutions, we combine innovation, clean code, and
-              modern technology to deliver results that matter.
+             We empower businesses to thrive in the digital era by delivering complete, innovative solutions.
+              From custom software development to SCORM-compliant e-learning platforms, our approach blends cutting-edge technology, 
+              clean design, and smart coding practices. Every project is crafted to enhance user experience, drive measurable results, 
+              and support sustainable growth in a rapidly evolving digital landscape.
+
             </p>
             <div className="flex justify-center lg:justify-start">
               <button className="px-6 py-2 bg-blue-400 text-white rounded-full hover:bg-blue-900">
@@ -204,28 +206,28 @@ export default function Services() {
                 id: 1,
                 logo: "/img/S2.png",
                 title: "SCORM Development",
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                text: "SCORM Development creates e-learning courses that work smoothly with LMS platforms. It ensures easy tracking of learner progress and course compatibility.",
                 
               },
               {
                 id: 2,
                 logo: "/img/S3.png",
                 title: "Software Development",
-                text: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                text: "Software Development involves designing, building, and maintaining applications or programs to meet user needs efficiently.",
                 
               },
               {
                 id: 3,
                 logo: "/img/S4.png",
                 title: "UI/UX Design",
-                text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+                text: "UI/UX Design focuses on creating user-friendly interfaces and seamless experiences to make digital products intuitive and engaging.",
                 
               },
               {
                 id: 4,
                 logo: "/img/S5.png",
                 title: "Mobile App Development",
-                text: "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+                text: "Mobile App Development involves creating applications for smartphones and tablets, ensuring smooth performance and user-friendly design.",
                 
               },
             ].map((card) => (
@@ -325,13 +327,14 @@ export default function Services() {
                     Software Development
                   </h2>
                   <p className="mb-1 text-xs sm:text-sm text-gray-600">
-                    We specialize in creating SCORM-compliant e-learning solutions that
-                    seamlessly integrate with any LMS.
+                    We build innovative software solutions that help businesses tackle challenges and achieve their goals. 
+                    By understanding each client’s unique needs, we create web, mobile, and enterprise applications that are scalable, user-friendly, and efficient.
                   </p>
                   <p className="mb-2 text-xs sm:text-sm text-gray-600 hidden sm:block">
-                    Our team develops SCORM e-learning solutions from scratch, ensuring
-                    interactive, trackable, and LMS-ready training modules tailored to
-                    your needs.
+                    Committed to quality and modern technology, our software is reliable,
+                     secure, and adaptable. We focus on delivering solutions that streamline processes,
+                      enhance user experience, and drive meaningful, lasting results.
+
                   </p>
                   <a className="inline-block mt-1 sm:mt-2 text-xs sm:text-base px-3 py-1 sm:px-4 sm:py-2 text-indigo-600 border border-indigo-600 rounded-full hover:bg-indigo-50 transition duration-200 font-medium whitespace-nowrap">
                     Request A Quote
@@ -404,13 +407,15 @@ export default function Services() {
                     UI/UX Design
                   </h2>
                   <p className="mb-1 text-xs sm:text-sm text-gray-600">
-                    We specialize in creating SCORM-compliant e-learning solutions that
-                    seamlessly integrate with any LMS.
+                    Our UI/UX design services focus on creating digital experiences that are both beautiful and highly functional.
+                     We combine user research, thoughtful interaction design, and visual storytelling to craft interfaces that are intuitive, 
+                     engaging, and aligned with your brand identity. 
                   </p>
                   <p className="mb-2 text-xs sm:text-sm text-gray-600 hidden sm:block">
-                    Our team develops SCORM e-learning solutions from scratch, ensuring
-                    interactive, trackable, and LMS-ready training modules tailored to
-                    your needs.
+                    From responsive websites to mobile apps, our designs ensure seamless navigation,
+                     enhanced usability, and memorable experiences that delight users.
+                      
+
                   </p>
                   <a className="inline-block mt-1 sm:mt-2 text-xs sm:text-base px-3 py-1 sm:px-4 sm:py-2 text-indigo-600 border border-indigo-600 rounded-full hover:bg-indigo-50 transition duration-200 font-medium whitespace-nowrap">
                     Request A Quote
@@ -426,13 +431,12 @@ export default function Services() {
                     Mobile App Development
                   </h2>
                   <p className="mb-1 text-xs sm:text-sm text-gray-600">
-                    We specialize in creating SCORM-compliant e-learning solutions that
-                    seamlessly integrate with any LMS.
+                   We specialize in building high-quality, user-friendly mobile applications for both iOS and Android platforms.
+                    Our team handles the entire development process—from concept and design to deployment and maintenance—ensuring apps are fast, secure, and scalable. 
                   </p>
                   <p className="mb-2 text-xs sm:text-sm text-gray-600 hidden sm:block">
-                    Our team develops SCORM e-learning solutions from scratch, ensuring
-                    interactive, trackable, and LMS-ready training modules tailored to
-                    your needs.
+                    By combining modern technologies, intuitive interfaces, and seamless performance,
+                     we create mobile solutions that engage users, enhance business operations, and deliver measurable results. 
                   </p>
                   <a className="inline-block mt-1 sm:mt-2 text-xs sm:text-base px-3 py-1 sm:px-4 sm:py-2 text-indigo-600 border border-indigo-600 rounded-full hover:bg-indigo-50 transition duration-200 font-medium whitespace-nowrap">
                     Request A Quote
@@ -474,7 +478,7 @@ export default function Services() {
 <div ref={formRef} id="contact-form">
         <Form />
       </div>
-
+<CustomCursor/>
       <Footer />
     </div>
   );

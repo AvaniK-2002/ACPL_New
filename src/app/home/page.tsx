@@ -7,27 +7,27 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
 import Form from "../components/Form";
-import { CardsParallax, cardsData } from "../components/scroll-cards"; // adjust path if needed
+
 
 
 const testimonials = [
   {
     id: 1,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.Lorem ipsum dolor sit amet.",
+    text: "Working with this team has been a game-changer. Their expertise and dedication delivered a software solution that exceeded our expectations.",
     name: "Jerry Welsom",
     role: "Manager, Software Company",
     image: "/img/home2.jpg",
   },
   {
     id: 2,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.Lorem ipsum dolor sit amet.",
+    text: "The team’s innovative approach and attention to detail made our project seamless. Highly recommend their services!",
     name: "Jerry Welsom",
     role: "Manager, Software Company",
     image: "/img/home2.jpg",
   },
   {
     id: 3,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.Lorem ipsum dolor sit amet.",
+    text: "From start to finish, the process was smooth and professional. Their commitment to quality truly stands out",
     name: "Jerry Welsom",
     role: "Manager, Software Company",
     image: "/img/home2.jpg",

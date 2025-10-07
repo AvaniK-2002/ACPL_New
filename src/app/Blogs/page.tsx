@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { NextPage } from "next";
@@ -8,6 +7,8 @@ import Image from "next/image";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CustomCursor from "../components/CustomCursor";
+import { motion } from "framer-motion";
 
 /* -------------------- MOCK DATA -------------------- */
 interface Article {
@@ -37,7 +38,13 @@ const MOCK_ARTICLES: Article[] = [
 
 /* -------------------- UI PARTS -------------------- */
 const ArticleCard: React.FC<Article> = ({ category, title, author, date, imageUrl }) => (
-  <article className="flex flex-col overflow-hidden bg-white rounded-lg shadow hover:shadow-md transition">
+  <motion.article
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.5 }}
+    className="flex flex-col overflow-hidden bg-white rounded-lg shadow hover:shadow-md transition"
+  >
     <div className="relative h-40 sm:h-48 md:h-56 w-full overflow-hidden rounded-t-lg bg-gray-100">
       <Image src={imageUrl} alt={title} fill className="object-cover" />
     </div>
@@ -52,7 +59,7 @@ const ArticleCard: React.FC<Article> = ({ category, title, author, date, imageUr
         {date}
       </p>
     </div>
-  </article>
+  </motion.article>
 );
 
 /* Sidebar with vertical line (desktop only) */
@@ -102,13 +109,8 @@ const ResourcesPage: NextPage = () => {
     (a) => activeCategory === "All Articles" || a.category === activeCategory
   );
 
-  // ✅ Add ref for form scrolling
   const formRef = useRef<HTMLDivElement>(null);
-
-  // ✅ Scroll function
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -124,78 +126,82 @@ const ResourcesPage: NextPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* ---------- Desktop button (visible md+ only) ---------- */}
-<div className="hidden md:block">
-  <div className="fixed left-0 top-1/2 z-40 -translate-y-1/2">
-    <Link href="/insights">
-      <button
-        className="-rotate-90 flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between"
+      {/* ---------- Desktop button ---------- */}
+      <div className="hidden md:block">
+        <div className="fixed left-0 top-1/2 z-40 -translate-y-1/2">
+          <Link href="/insights">
+            <button className="-rotate-90 flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between">
+              Case Studies
+            </button>
+          </Link>
+        </div>
+      </div>
+
+      {/* ---------- Top Section ---------- */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative w-full mx-auto flex flex-col md:flex-row items-start py-12 overflow-hidden px-4 md:px-0"
       >
-        Case Studies
-      </button>
-    </Link>
-  </div>
-</div>
-
-
-
-
-
-      {/* ---------- Top section: responsive ---------- */}
-      <section className="relative w-full mx-auto flex flex-col lg:flex-row items-start py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background decorations (desktop only) */}
-        <div className="absolute left-0 w-3/4 h-[160%] -translate-y-100 -translate-x-40 hidden lg:block pointer-events-none">
-          <Image src="/img/Frame 130.png" alt="Left background" fill className="object-contain" priority />
-        </div>
-        <div className="absolute right-0 top-0 w-3/4 h-[160%] translate-y-10 translate-x-50 hidden lg:block pointer-events-none">
-          <Image src="/img/Frame 131.png" alt="Right background" fill className="object-contain" priority />
+        <div className="absolute left-0 w-3/4 h-[120%] -translate-y-70 -translate-x-50 hidden md:block">
+          <Image src="/img/Frame 130.png" alt="Left Background" fill className="object-contain" priority />
         </div>
 
-        {/* Heading (always visible) */}
-        <div className="flex-1 relative z-10 mt-6 md:mt-10 text-center lg:text-left flex flex-col items-center lg:items-start lg:ml-40">
+        <div className="absolute right-0 top-0 w-3/4 h-[120%] translate-y-40 translate-x-70 hidden md:block">
+          <Image src="/img/Frame 131.png" alt="Right Background" fill className="object-contain" priority />
+        </div>
+
+        <div className="flex-1 relative z-10 ml-0 mt-0 md:ml-40 md:mt-10 mb-8 md:mb-0">
           <h4 className="text-gray-500 text-sm mb-2">Insights</h4>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            <span>News And </span>
-            <br className="hidden lg:block" /> Resources
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            <span>News And </span> <br /> Resources
           </h1>
-          <div className="flex gap-2 mt-4">
-            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
-            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
-            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+
+          <div className="flex mt-4 gap-2">
+            <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+            <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+            <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
           </div>
         </div>
 
-        {/* Featured image + description (desktop only) */}
-        <div className="hidden lg:flex flex-1 relative z-10 flex-col lg:flex-row gap-6 lg:gap-10 mt-8 lg:mt-0 lg:mr-40">
-          <div className="relative w-full lg:w-1/2 h-56 lg:h-72">
-            <Image src="/img/c1.jpg" alt="Trending" fill className="rounded-lg object-cover" />
+        <div className="flex-1 relative z-10 flex flex-col sm:flex-row mr-0 md:mr-48 gap-4">
+          <div className="relative w-full h-48 sm:w-90 sm:h-70 order-2 sm:order-1">
+            <Image src="/img/c1.jpg" alt="Trending" fill className="rounded-lg object-cover" priority />
           </div>
-          <div className="flex flex-col justify-between bg-gradient-to-r from-blue-50 to-purple-50 p-4 lg:p-6 rounded-lg w-full lg:w-1/2">
+
+          <div className="flex flex-col justify-between bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg w-full sm:w-120 order-1 sm:order-2">
             <span className="text-xs font-semibold text-red-500 mb-2">Trending Now</span>
-            <h2 className="text-lg lg:text-2xl font-semibold mb-2">Trends in AI And Pricing</h2>
-            <p className="text-gray-600 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet.</p>
+            <h2 className="text-xl sm:text-2xl font-semibold mb-2">Trends in AI And Pricing</h2>
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+              Artificial Intelligence is transforming how businesses approach pricing. By analyzing market trends, customer behavior, and demand patterns, AI helps companies set smarter, dynamic prices in real time.
+            </p>
             <div className="flex justify-between text-xs text-gray-500">
               <span>Author</span>
               <span>Sept 20, 2025</span>
             </div>
           </div>
         </div>
+      </motion.section>
 
-        
-      </section>
+      {/* ---------- Mobile button ---------- */}
+      <div className="relative z-20 mx-24 mt-4 block md:hidden">
+        <Link href="/insights">
+          <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between">
+            Case studies
+          </button>
+        </Link>
+      </div>
 
-      {/* Mobile-friendly horizontal button (visible on small screens) */}
-<div className="relative z-20 mx-24 mt-4  block md:hidden">
-  <Link href="/insights">
-    <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between">
-      Case studies
-      
-    </button>
-  </Link>
-</div>
-
-      {/* ---------- Main content (sidebar + article grid) ---------- */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      {/* ---------- Main content ---------- */}
+      <motion.main
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
+      >
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <aside className="lg:col-span-3 mb-8 lg:mb-0">
             <Sidebar activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
@@ -215,15 +221,23 @@ const ResourcesPage: NextPage = () => {
             </div>
           </section>
         </div>
-      </main>
+      </motion.main>
 
-      <div ref={formRef} id="contact-form">
+      <motion.div
+        ref={formRef}
+        id="contact-form"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <Form />
-      </div>
+      </motion.div>
+
+      <CustomCursor />
       <Footer />
     </div>
   );
 };
 
 export default ResourcesPage;
-

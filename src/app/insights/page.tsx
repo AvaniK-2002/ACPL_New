@@ -6,20 +6,18 @@ import { ChevronDown } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Form from "../components/Form";
+import CustomCursor from "../components/CustomCursor";
+import { motion } from "framer-motion"; // ✨ Animation import
 
 export default function NewsPage() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // ✅ Add ref for form scrolling
   const formRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Scroll function
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -31,25 +29,27 @@ export default function NewsPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white ">
+    <div className="relative min-h-screen bg-white">
       <Header />
 
-      
+      {/* Desktop rotated button (visible on md+ screens) */}
+      <div className="fixed left-0 top-1/2 -rotate-90 z-20 hidden md:block">
+        <Link href="/Blogs">
+          <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between">
+            Blogs
+          </button>
+        </Link>
+      </div>
 
-{/* Desktop rotated button (visible on md+ screens) */}
-<div className="fixed left-0 top-1/2 -rotate-90 z-20 hidden md:block">
-  <Link href="/Blogs">
-    <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-t-lg shadow w-36 justify-between">
-      Blogs
-      
-    </button>
-  </Link>
-</div>
-
-
-      {/* Top Section */}
-      <section className="relative w-full mx-auto flex flex-col md:flex-row items-start py-12 overflow-hidden px-4 md:px-0">
-        {/* Background images - Hidden on mobile for performance/clutter */}
+      {/* ✨ Animated Top Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative w-full mx-auto flex flex-col md:flex-row items-start py-12 overflow-hidden px-4 md:px-0"
+      >
+        {/* Background images */}
         <div className="absolute left-0 w-3/4 h-[120%] -translate-y-70 -translate-x-50 hidden md:block">
           <Image
             src="/img/Frame 130.png"
@@ -59,7 +59,6 @@ export default function NewsPage() {
             priority
           />
         </div>
-
         <div className="absolute right-0 top-0 w-3/4 h-[120%] translate-y-40 translate-x-70 hidden md:block">
           <Image
             src="/img/Frame 131.png"
@@ -107,8 +106,7 @@ export default function NewsPage() {
               Trends in AI And Pricing
             </h2>
             <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-              ipsum dolor sit amet.
+              Artificial Intelligence is transforming how businesses approach pricing. By analyzing market trends, customer behavior, and demand patterns, AI helps companies set smarter, dynamic prices in real time.
             </p>
             <div className="flex justify-between text-xs text-gray-500">
               <span>Author</span>
@@ -116,22 +114,25 @@ export default function NewsPage() {
             </div>
           </div>
         </div>
-      </section>
-      {/* Mobile-friendly horizontal button (visible on small screens) */}
-<div className="relative z-20 mx-34 mt-4  block md:hidden">
-  <Link href="/Blogs">
-    <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between">
-      Blogs
-      
-    </button>
-  </Link>
-</div>
+      </motion.section>
 
-      {/* Divider - This seems misplaced/redundant in the original, keeping it minimally visible */}
-      <div className="hidden border-l-4 border-gray-500 pl-4"></div>
+      {/* Mobile-friendly horizontal button */}
+      <div className="relative z-20 mx-34 mt-4 block md:hidden">
+        <Link href="/Blogs">
+          <button className="flex items-center gap-1 bg-purple-100 text-gray-800 font-medium px-4 py-3 rounded-lg shadow w-full justify-between">
+            Blogs
+          </button>
+        </Link>
+      </div>
 
-      {/* Explore Case Studies */}
-      <section className="container mx-auto flex flex-col md:flex-row gap-6 px-4 mt-12 md:mt-28">
+      {/* ✨ Animated Explore Case Studies */}
+      <motion.section
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="container mx-auto flex flex-col md:flex-row gap-6 px-4 mt-12 md:mt-28"
+      >
         {/* Left Content (Title/Button) */}
         <div className="w-full md:w-1/3 space-y-6 md:sticky md:top-24 h-fit">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 -mt-0 md:-mt-20">
@@ -153,8 +154,14 @@ export default function NewsPage() {
         {/* Blog List (Right Content) */}
         <div className="w-full md:w-2/3 flex flex-col gap-4">
           {/* Blog Card 1 */}
-          <div className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden">
-            <div className="w-full sm:w-1/3 relative h-48 sm:h-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden min-h-[200px]"
+          >
+            <div className="w-full sm:w-1/3 relative h-80 sm:h-auto">
               <Image src="/img/c2.jpg" alt="Blog 1" fill className="object-cover" priority />
             </div>
             <div className="w-full sm:w-2/3 p-4">
@@ -162,16 +169,25 @@ export default function NewsPage() {
               <h3 className="font-semibold text-gray-800">
                 Challenge: The business obstacle faced
               </h3>
-              <p className="text-xs text-gray-500 mt-2 line-clamp-2">
-                Low learner engagement and high churn.
+              <p className="text-xs text-gray-500 mt-2 text-justify leading-relaxed">
+                Many organizations struggle with low learner engagement and high churn in their training programs.
+                Traditional learning methods often fail to capture attention, leading to incomplete courses, poor knowledge retention,
+                and a drop in overall training effectiveness. This challenge impacts not only employee skill development but also business performance,
+                as disengaged learners are less likely to apply knowledge effectively in real-world scenarios.
               </p>
               <span className="text-xs text-gray-400 block mt-2">Sept 20, 2025</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Blog Card 2 */}
-          <div className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden">
-            <div className="w-full sm:w-1/3 relative h-48 sm:h-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden min-h-[200px]"
+          >
+            <div className="w-full sm:w-1/3 relative h-80 sm:h-auto">
               <Image src="/img/c3.jpg" alt="Blog 2" fill className="object-cover" priority />
             </div>
             <div className="w-full sm:w-2/3 p-4">
@@ -179,16 +195,26 @@ export default function NewsPage() {
               <h3 className="font-semibold text-gray-800">
                 Solution: How our technology or AI-driven product solved it.
               </h3>
-              <p className="text-xs text-gray-500 mt-2 line-clamp-2">
-                Implemented AI-driven personalized learning.
+              <p className="text-xs text-gray-500 mt-2 text-justify leading-relaxed">
+                To tackle low learner engagement and high churn, we implemented an AI-driven personalized learning system.
+                Our technology analyzes individual learner behavior, preferences, and progress to deliver customized content,
+                adaptive assessments, and interactive experiences. This approach keeps learners motivated, improves knowledge retention,
+                and significantly reduces drop-off rates. By making learning relevant and engaging for each user, our solution transforms
+                training programs into effective, results-driven experiences.
               </p>
               <span className="text-xs text-gray-400 block mt-2">Sept 20, 2025</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Blog Card 3 */}
-          <div className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden">
-            <div className="w-full sm:w-1/3 relative h-48 sm:h-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 bg-white shadow border rounded-lg overflow-hidden min-h-[200px]"
+          >
+            <div className="w-full sm:w-1/3 relative h-80 sm:h-auto">
               <Image src="/img/c4.jpg" alt="Blog 3" fill className="object-cover" priority />
             </div>
             <div className="w-full sm:w-2/3 p-4">
@@ -196,20 +222,31 @@ export default function NewsPage() {
               <h3 className="font-semibold text-gray-800">
                 Results: Measurable impact with real data
               </h3>
-              <p className="text-xs text-gray-500 mt-2 line-clamp-2">
-                45% increase in retention and 80% boost in user adoption.
+              <p className="text-xs text-gray-500 mt-2 text-justify leading-relaxed">
+                Our AI-driven personalized learning solution delivered significant results, achieving a 45% increase in learner retention and an 80% boost in user adoption.
+                These improvements demonstrate how targeted, engaging, and adaptive learning experiences can transform training programs, drive business outcomes,
+                and maximize the value of every learner interaction.
               </p>
               <span className="text-xs text-gray-400 block mt-2">Sept 20, 2025</span>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
-      
-      <div className="mt-12 md:mt-20">
+      </motion.section>
+
+      {/* ✨ Animated Form Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="mt-12 md:mt-20"
+      >
         <div ref={formRef} id="contact-form">
-        <Form />
-      </div>
-      </div>
+          <Form />
+        </div>
+      </motion.div>
+
+      <CustomCursor />
       <Footer />
     </div>
   );
